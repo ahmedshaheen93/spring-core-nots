@@ -15,7 +15,7 @@
   				what is the factory-bean class , what is the factory-method
 ## Dependency Injection
 ### 1-Constructor Injection
-      - define bean with write contractor that takes injected beans
+####  -define bean with write contractor that takes injected beans
         ```java
           public class UserServiceImpl{
             // reference to injected bean
