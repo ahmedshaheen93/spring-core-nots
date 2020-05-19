@@ -35,4 +35,42 @@
 </beans>
 ```
 ### 2-Factory Method Injection
+#### -define a factory bean with a factroy method that tacks dependacy as arg 
+```java
+//factory class
+public class ServiceFactory{
+  // factory method
+  public UserService createUserService(UserRepo repo){
+    return new UserServiceImpl(repo);
+  }
+}
+```
+```xml
+<beans>
+  <bean id="factory" class="com.shaheen.service.ServiceFactory"></bean>
+  <bean id="userRepo" class="com.shaheen.repo.UserRepo"></bean>
+  <bean id="userService" factory-bean="factory" factory-method="createUserService">
+    <constructor-arg ref="userRepo"/>
+  </bean>
+</beans>
+```
 ### 3-Setter Injection
+#### -define a set method that tacks dependacy as arg inside
+```java
+  public class UserServiceImpl{
+    // reference to injected bean
+    private  UserRepo repo;
+    // setter Injection of UserRepo
+    public void setUserRepo(UserRepo repo){
+      this.repo =repo;
+    }
+  }
+```
+```xml
+<beans>
+  <bean id="userRepo" class="com.shaheen.repo.UserRepo"></bean>
+  <bean id="userService" class="com.shaheen.service.UserServiceImpl">
+    <property name="repo" ref="userRepo"/>
+  </bean>
+</beans>
+```
