@@ -26,5 +26,13 @@
     }
   }
 ```
+```xml
+<beans>
+  <bean id="userRepo" class="com.shaheen.repo.UserRepo"></bean>
+  <bean id="userService" class="com.shaheen.service.UserServiceImpl">
+    <constructor-arg ref="userRepo"/>
+  </bean>
+</beans>
+```
 ### 2-Factory Method Injection
 ### 3-Setter Injection
