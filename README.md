@@ -74,3 +74,31 @@ public class ServiceFactory{
   </bean>
 </beans>
 ```
+- note
+  - Constructor Injection for mandatory dependencies.
+  - Setter methods for optional dependencies.
+  - Circular dependencies might happen when you use Constructor Injection, to avoid that use Setter method
+
+## Autowiring
+#### 1. no (default)
+
+- means that you are responsable for wiring bean dependancies by yourself
+
+#### 2. byName
+
+- Autowiring by property name.
+-Container Wiring a bean with the same name as the property that needs to be autowired.
+
+#### 3. byType
+
+- Autowiring by property type
+- Container Wiring if exactly one bean of the property type exists in the container.
+- If more than one exists, a fatal exception is thrown, which indicates that you may
+not use byType autowiring for that bean.
+- If there are no matching beans, nothing happens (the property is not set).
+
+#### 4. constructor
+• Autowiring by property type in constructor arguments
+• Container Wiring byType but applies to constructor arguments.
+• If there is not exactly one bean of the constructor argument type in the container, a
+fatal error is raised.
