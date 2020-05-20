@@ -7,11 +7,11 @@
 
 ###	2-Static factory method
 - Static method inside Class
- - which can call the write contractor and instantiate the bean
+ - which can call the right contractor and instantiate the bean
 
 ###	3-factory method
 - non static method inside a factory class
-	- which can call the write contractor and instantiate the bean
+	- which can call the right contractor and instantiate the bean
 	- when you define the bean you should specify what is the factory-bean class , what is the factory-method
 
 ## Dependency Injection
@@ -91,16 +91,61 @@ public class ServiceFactory{
 
 - Autowiring by property name.
 -Container Wiring a bean with the same name as the property that needs to be autowired.
+```java
+  public class UserServiceImpl{
+    // autowird bean
+    // container will search for a bean with the same name and inject it here
+    private  UserRepo repo;
+  }
+```
+```xml
+<beans>
+  <bean id="userRepo" class="com.shaheen.repo.UserRepo" />
+  <bean id="userService" class="com.shaheen.service.UserServiceImpl" autowire="byName"/>
+</beans>
+```
 
 #### 3. byType
 
 - Autowiring by property type
 - Container Wiring if exactly one bean of the property type exists in the container.
-- If more than one exists, a fatal exception is thrown, which indicates that you may
-not use byType autowiring for that bean.
+- If more than one exists, a fatal exception is thrown, which indicates that you may not use byType autowiring for that bean.
 - If there are no matching beans, nothing happens (the property is not set).
+
+```java
+public class UserController{
+  // UserService is the parent interface for UserServiceImpl class
+  // the container will search for a bean with the same type and inject it here
+  private UserService userService;
+}
+```
+```xml
+<beans>
+  <bean id="userRepo" class="com.shaheen.repo.UserRepo" />
+  <bean id="userService" class="com.shaheen.service.UserServiceImpl" autowire="byName"/>
+  <bean id="UserController" class="com.shaheen.controller.UserController" autowire="byType">
+</beans>
+```
 
 #### 4. constructor
 - Autowiring by property type in constructor arguments
 - Container Wiring byType but applies to constructor arguments.
 - If there is not exactly one bean of the constructor argument type in the container, a fatal error is raised.
+
+```java
+public class UserController{
+  // UserService is the parent interface for UserServiceImpl class
+  private UserService userService;
+   // the container will search for a bean with the same type and inject it here
+  public UserController(UserService userService){
+    this.userService = userService;
+  }
+}
+```
+```xml
+<beans>
+  <bean id="userRepo" class="com.shaheen.repo.UserRepo" />
+  <bean id="userService" class="com.shaheen.service.UserServiceImpl" autowire="byName"/>
+  <bean id="UserController" class="com.shaheen.controller.UserController" autowire="constructor">
+</beans>
+```
