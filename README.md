@@ -1,20 +1,23 @@
 # spring-core-nots
 ## Instantiating beans
 ###	1-Constructor
-  		- Default Constructor    	---> no constructor written on bean so it will call parent Constructor Object()
-  		- No arg Constructor 		---> UserServiceImpl()
-  		- Overloaded Constructor 	---> UserServiceImpl(Object o)
+- Default Constructor    	---> no constructor written on bean so it will call parent Constructor Object()
+- No arg Constructor 		---> UserServiceImpl()
+- Overloaded Constructor 	---> UserServiceImpl(Object o)
 
 ###	2-Static factory method
-  		- Static method inside Class
-  			- which can call the write contractor and instantiate the bean
+- Static method inside Class
+ - which can call the write contractor and instantiate the bean
+
 ###	3-factory method
-  		- non static method inside a factory class
-  			- which can call the write contractor and instantiate the bean
-  			- when you define the bean you should specify
-  				what is the factory-bean class , what is the factory-method
+- non static method inside a factory class
+	- which can call the write contractor and instantiate the bean
+	- when you define the bean you should specify what is the factory-bean class , what is the factory-method
+
 ## Dependency Injection
+
 ### 1-Constructor Injection
+
 ####  -define bean with write contractor that takes injected beans
 ```java
   public class UserServiceImpl{
@@ -98,7 +101,6 @@ not use byType autowiring for that bean.
 - If there are no matching beans, nothing happens (the property is not set).
 
 #### 4. constructor
-• Autowiring by property type in constructor arguments
-• Container Wiring byType but applies to constructor arguments.
-• If there is not exactly one bean of the constructor argument type in the container, a
-fatal error is raised.
+- Autowiring by property type in constructor arguments
+- Container Wiring byType but applies to constructor arguments.
+- If there is not exactly one bean of the constructor argument type in the container, a fatal error is raised.
